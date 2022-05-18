@@ -7,4 +7,5 @@ urlpatterns = [
     # path('login/', auth_views.LoginView.as_view(template_name='pybo/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('login/', views.login_user, name='login'),
+    path('signup/', views.signup, name='signup')
 ]

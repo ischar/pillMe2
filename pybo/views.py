@@ -32,3 +32,19 @@ def login_user(request):
         else:
             messages.error(request, '아이디 혹은 비밀번호가 틀렸습니다.')
     return render(request, 'pybo/login.html')
+
+
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            # userid = form.cleaned_data.get('userId')
+            #raw_password = form.cleaned_data.get('password1')
+           # user = authenticate(userid=userid, password=raw_password)
+            login_user(request.POST)
+        else:
+            form = UserCreationForm()
+    return render(request, 'pybo/signup.html')
