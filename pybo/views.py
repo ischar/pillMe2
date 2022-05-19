@@ -33,8 +33,6 @@ def login_user(request):
             messages.error(request, '아이디 혹은 비밀번호가 틀렸습니다.')
     return render(request, 'pybo/login.html')
 
-
-
 def signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -48,3 +46,7 @@ def signup(request):
         else:
             form = UserCreationForm()
     return render(request, 'pybo/signup.html')
+
+
+def mypill(request):
+    return render(request, 'pybo/mypill.html')
