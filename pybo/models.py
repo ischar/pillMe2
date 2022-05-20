@@ -57,4 +57,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         return self.is_admin
-    
+
+
+
+class Friend(models.Model):
+    userId = models.CharField(max_length=25, null=False)
+    userName = models.CharField(max_length=25, null=False)
+    userFriend = models.CharField(max_length=25, null=False)
+    userFriendId = models.CharField(max_length=25, null=False)
