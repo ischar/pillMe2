@@ -2,6 +2,9 @@ from multiprocessing import AuthenticationError
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages 
+from django.db import connection
+from django.db.models import Q
+from .models import User
 
 from .models import *
 from .forms import *
@@ -50,3 +53,26 @@ def signup(request):
 
 def mypill(request):
     return render(request, 'pybo/mypill.html')
+
+
+def friend(request):
+    return render(request, 'pybo/friend.html')
+    
+    
+def searchFriend(request):
+    try:
+        userId = request.GET.get('kw', '')
+        cursor = connection.cursor()
+        strSql = "SELECT userId FROM pybo_user WHERE userId = "+"'"+userId+"';"
+        result = cursor.execute(strSql)
+        friend = cursor.fetchall()
+        print(result)
+        
+        connection.coomit()
+        connection.close()
+    except:
+        connection.rollback()
+        print("Failed")
+            
+    return render(request, 'pybo/friend.html')
+    

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="loginOutBox">
+    <div class="loginInBox">
+        <div class="searchBox">
+            <form id="searchForm" method="GET" action="{% url 'searchFriend' %}">
+                <input type="text" name="" id="search_kw" th:value="${kw}" placeholder="ID로 검색하여 친구 추가하기" style="width:350px; height:42px; text-align:center;">
+                <button type="submit" class="btnFriend" id="searchFriend" name="searchFriend">SEARCH</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div>
+    <p>{{ user.userName }}님의 친구</p>
+</div>
+
+{% endblock %}
