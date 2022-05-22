@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<script>
+    document.write("<div>");
+        const value = e.value;
+        for(var i =0; i<value; i++) {
+            document.write("<p>1231132</p>");
+        }
+    document.write("</div>");
+</script>
+<div class="loginOutBox">
+    <div class="loginInBox">
+        <div class="middleBox">
+            <form>
+                <h3>모듈 번호</h3>
+                <input type="text" id="search_kw" name="q" value="{{q}}" placeholder="ID로 검색하여 친구 추가하기" style="width:350px; height:42px; text-align:center;">
+                <h3>별칭 이름</h3>
+                <input type="text" id="search_kw" name="q" value="{{q}}" placeholder="ID로 검색하여 친구 추가하기" style="width:350px; height:42px; text-align:center;">
+                
+                <select>
+                    <option>매일</option>
+                    <option></option>
+                </select>
+                <select onchange="forChange(this)">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                
+                <select>
+                    <option>식전</option>
+                    <option>식후</option>
+                </select>
+            </form> 
+
+        </div>
+    </div>
+</div>
+{% endblock %}}
