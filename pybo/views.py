@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.db import connection
 from django.db.models import Q
 from .models import User
+from .models import Friend
 
 from .models import *
 from .forms import *
@@ -12,7 +13,6 @@ from .forms import *
 
 def index(request):
     return render(request, 'pybo/main.html')
-
 
 def login_user(request):
     if request.user.is_authenticated:
@@ -56,23 +56,50 @@ def mypill(request):
 
 
 def friend(request):
-    return render(request, 'pybo/friend.html')
+    friendlist = Friend.objects.all().order_by('id')
+
+    q = request.user.userId
+
+    if q:
+        friendlist = friendlist.filter(userId__icontains=q)
+        return render(request, 'pybo/friend.html', {'friendlist': friendlist})
     
     
-def searchFriend(request):
-    try:
-        userId = request.GET.get('kw', '')
-        cursor = connection.cursor()
-        strSql = "SELECT userId FROM pybo_user WHERE userId = "+"'"+userId+"';"
-        result = cursor.execute(strSql)
-        friend = cursor.fetchall()
-        print(result)
-        
-        connection.coomit()
-        connection.close()
-    except:
-        connection.rollback()
-        print("Failed")
-            
-    return render(request, 'pybo/friend.html')
-    
+def search(request):
+    blogs = User.objects.all().order_by('id')
+
+    q = request.POST.get('q', '')
+
+    if q:
+        blogs = blogs.filter(userId__icontains=q)
+        friend = blogs.get(userId=q)        
+        friends = Friend()
+        friends.userId = request.user.userId
+        friends.userName = request.user.userName
+        friends.userFriend = friend.userName
+        friends.userFriendId = friend.userId  
+        friends.save()
+
+        userId = request.user.userId
+        friendlist = Friend.objects.all().order_by('id')
+        friendlist = friendlist.filter(userId__icontains=userId)
+        return render(request, 'pybo/friend.html', {'blogs' : blogs, 'friendlist' : friendlist})
+    else:
+        userId = request.user.userId
+        friendlist = Friend.objects.all().order_by('id')
+        friendlist = friendlist.filter(userId__icontains=userId)
+        return render(request, 'pybo/friend.html', {'friendlist' : friendlist})
+
+
+def friendList(request):
+    friendlist = Friend.objects.all().order_by('id')
+
+    q = request.user.userId
+
+    if q:
+        friendlist = friendlist.filter(userId__icontains=q)
+        return render(request, 'pybo/friend.html', {'friendlist': friendlist})
+
+
+def addpill(request):
+    return render(request, 'pybo/addpill.html')

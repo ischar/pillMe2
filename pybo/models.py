@@ -65,3 +65,4 @@ class Friend(models.Model):
     userName = models.CharField(max_length=25, null=False)
     userFriend = models.CharField(max_length=25, null=False)
     userFriendId = models.CharField(max_length=25, null=False)
+
