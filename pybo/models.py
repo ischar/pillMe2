@@ -66,3 +66,22 @@ class Friend(models.Model):
     userFriend = models.CharField(max_length=25, null=False)
     userFriendId = models.CharField(max_length=25, null=False)
 
+
+
+class PillList(models.Model):
+    ModuleNum = models.CharField(max_length=45, null=False, primary_key=True)
+    PillMaster = models.CharField(max_length=45, null=False)
+    PillName = models.CharField(max_length=45, null=False)
+    PillAmount = models.CharField(max_length=45, null=False)
+    PillTime = models.CharField(max_length=45, null=False)
+    PillEat = models.CharField(max_length=45, null=False)
+
+class PillTake(models.Model):
+    ModuleNum = models.CharField(max_length=45, null=False, primary_key = True)
+    PillTakeTime = models.CharField(max_length=45, null=False)
+
+class PillTime(models.Model):
+    ModuleNum = models.CharField(max_length=45, null=False)
+    PillName = models.CharField(max_length=45, null=False)
+    PillMaster = models.CharField(max_length=45, null=False)
+    EatTime = models.CharField(max_length=45, null=False)

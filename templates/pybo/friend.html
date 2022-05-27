@@ -15,7 +15,7 @@
             {% else %}
                 <h1> {{user.userName}}님의 친구 목록</h1>
                 {% for friend in friendlist.all %}
-                    <h1>{{ friend.userFriend }}</h1>
+                    <a href="{{friend.userFriend}}"><p>{{friend.userFriend}}</p></a>
                 {% endfor %}
             {% endif %}
         </div>
@@ -23,6 +23,4 @@
 </div>
 
 <br>
-
-
 {% endblock %}
