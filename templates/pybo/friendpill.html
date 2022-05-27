@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not pillList %}
+<h4> 약이 없습니다. </h4>
+{% else %}
+<h1> {{userName.userName}}님의 약 목록</h1>
+{% for pill in pillList.all %}
+    <p>{{pill.PillName}}</p>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

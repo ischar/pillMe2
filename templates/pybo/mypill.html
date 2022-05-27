@@ -2,5 +2,13 @@
 
 {% block content %}
 <a href="/pybo/addpill"><p>약 추가</p></a>
+{% if not pilllist %}
+<h4> 등록된 약이 없습니다. </h4>
+{% else %}
+<h1> {{user.userName}}님의 약 목록</h1>
+{% for pill in pilllist.all %}
+    <h1>{{ pill.PillName }}</h1>
+{% endfor %}
+{% endif %}
 {% endblock %}
 

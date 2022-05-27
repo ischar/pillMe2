@@ -6,6 +6,9 @@ from django.db import connection
 from django.db.models import Q
 from .models import User
 from .models import Friend
+from .models import PillList
+from .models import PillTake
+from .models import PillTime
 
 from .models import *
 from .forms import *
@@ -101,5 +104,58 @@ def friendList(request):
         return render(request, 'pybo/friend.html', {'friendlist': friendlist})
 
 
-def addpill(request):
+def addpill(request):        
+        return render(request, 'pybo/addpill.html')
+
+def mypill(request):
+    pilllist = PillList.objects.all()
+    
+    q = request.user.userId
+    if q:
+        pilllist = pilllist.filter(PillMaster__icontains=q)        
+        return render(request, 'pybo/mypill.html', {'pilllist': pilllist})
+def addpillList(request):
+
+    smartpill = PillList()
+    smartpill.ModuleNum = request.POST.get('ModuleNum')
+    smartpill.PillMaster = request.user.userId
+    smartpill.PillName = request.POST.get('PillName')
+    smartpill.PillAmount = '0'
+    PillEat = request.POST.get('PillEat')
+    pillTime = request.POST.get('PillTime')
+
+    if PillEat == "식전":
+        smartpill.PillEat = '0'
+    else:
+        smartpill.PillEat = '1'
+
+    if pillTime == '1':
+        smartpill.PillTime = '0'
+    elif pillTime == '2':
+        smartpill.PillTime = '1'
+    else:
+        smartpill.PillTime = '2'
+
+    smartpill.save()
+
+    pilltime = PillTime()
+    pilltime.ModuleNum = request.POST.get('ModuleNum')
+    pilltime.PillName =  request.POST.get('PillName') 
+    pilltime.PillMaster = request.user.userId
+    pilltime.EatTime = request.POST.get('EatTime')
+    pilltime.save()
+    
     return render(request, 'pybo/addpill.html')
+
+def friendpill(request, username):
+   # pilllist = PillList.objects.all()
+    pillList = PillList.objects.filter(PillMaster__icontains=username)
+    userName = {
+        'userName': username,
+    }
+   # pilllist = pilllist.objects.filter(PillMaster__icontains=userName)
+
+#    render(request, 'pybo/friendpill.html', {'pilllist': pilllist})
+    return render(request, 'pybo/friendpill.html', {'userName' : userName, 'pillList': pillList})
+
+

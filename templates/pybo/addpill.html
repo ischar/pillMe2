@@ -1,38 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 <script>
-    document.write("<div>");
+    function handleOnChange(e) {
         const value = e.value;
-        for(var i =0; i<value; i++) {
-            document.write("<p>1231132</p>");
+
+        for (i=0; i< value; i++) {
+            document.getElementById('result').innerText=value;
         }
-    document.write("</div>");
+    }
 </script>
 <div class="loginOutBox">
     <div class="loginInBox">
         <div class="middleBox">
-            <form>
+            <form method="post" action="{% url 'addpillList' %}">
+                {% csrf_token %}
                 <h3>모듈 번호</h3>
-                <input type="text" id="search_kw" name="q" value="{{q}}" placeholder="ID로 검색하여 친구 추가하기" style="width:350px; height:42px; text-align:center;">
+                <input type="text" id="ModuleNum" name="ModuleNum" value="{{ModuleNum}}" placeholder="모듈 번호를 입력하세요." style="width:350px; height:42px; text-align:center;">
                 <h3>별칭 이름</h3>
-                <input type="text" id="search_kw" name="q" value="{{q}}" placeholder="ID로 검색하여 친구 추가하기" style="width:350px; height:42px; text-align:center;">
-                
+                <input type="text" id="search_kw" name="PillName" value="{{PillName}}" placeholder="별칭을 입력하세요." style="width:350px; height:42px; text-align:center;">
                 <select>
                     <option>매일</option>
                     <option></option>
                 </select>
-                <select onchange="forChange(this)">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-                
                 <select>
-                    <option>식전</option>
-                    <option>식후</option>
+                    <option value="{{PillTime}}">1</option>
+                    <option value="{{PillTime}}">2</option>
+                    <option value="{{PillTime}}">3</option>
                 </select>
+                <select>
+                    <option value ="{{EatTime}}">before</option>
+                    <option value ="{{EatTime}}">after</option>
+                </select>
+                <input type="time" name="birthtime" value = "{{PillTakeTime}}">
+                <button type="submit">추가</button>
             </form> 
-
         </div>
     </div>
 </div>
