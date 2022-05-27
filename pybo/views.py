@@ -105,7 +105,7 @@ def friendList(request):
 
 
 def addpill(request):        
-        return render(request, 'pybo/addpill.html', {'pilllist': pilllist})
+        return render(request, 'pybo/addpill.html')
 
 def mypill(request):
     pilllist = PillList.objects.all()
@@ -149,10 +149,13 @@ def addpillList(request):
 
 def friendpill(request, username):
    # pilllist = PillList.objects.all()
+    pillList = PillList.objects.filter(PillMaster__icontains=username)
     userName = {
         'userName': username,
     }
    # pilllist = pilllist.objects.filter(PillMaster__icontains=userName)
 
 #    render(request, 'pybo/friendpill.html', {'pilllist': pilllist})
-    return render(request, 'pybo/friendpill.html', {'userName' : userName})
+    return render(request, 'pybo/friendpill.html', {'userName' : userName, 'pillList': pillList})
+
+
