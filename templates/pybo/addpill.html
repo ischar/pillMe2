@@ -22,16 +22,16 @@
                     <option>매일</option>
                     <option></option>
                 </select>
-                <select>
-                    <option value="{{PillTime}}">1</option>
-                    <option value="{{PillTime}}">2</option>
-                    <option value="{{PillTime}}">3</option>
+                <select name="PillTime">
+                    <option id="PillTime" name="PillTime" value="1">1</option>
+                    <option id="PillTime" name="PillTime" value="2">2</option>
+                    <option id="PillTime" name="PillTime" value="3">3</option>
                 </select>
-                <select>
-                    <option value ="{{EatTime}}">before</option>
-                    <option value ="{{EatTime}}">after</option>
+                <select name="PillEat">
+                    <option id="PillEat" name="before" value="before">before</option>
+                    <option id="PillEat" name="after" value="after">after</option>
                 </select>
-                <input type="time" name="birthtime" value = "{{PillTakeTime}}">
+                <input type="time" name="EatTime" value = "{{EatTime}}">
                 <button type="submit">추가</button>
             </form> 
         </div>
