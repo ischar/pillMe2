@@ -121,10 +121,10 @@ def addpillList(request):
     smartpill.PillMaster = request.user.userId
     smartpill.PillName = request.POST.get('PillName')
     smartpill.PillAmount = '0'
-    PillEat = request.POST.get('PillEat')
+    PillEat = request.POST.get('PillEat') 
     pillTime = request.POST.get('PillTime')
 
-    if PillEat == "식전":
+    if PillEat == 'before':
         smartpill.PillEat = '0'
     else:
         smartpill.PillEat = '1'
